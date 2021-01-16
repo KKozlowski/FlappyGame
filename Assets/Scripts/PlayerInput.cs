@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Flapper
 {
+    using Signals;
     public class PlayerInput : MonoBehaviour
     {
         [SerializeField] private FlapMovement movement;
@@ -12,8 +13,7 @@ namespace Flapper
         {
             if (Input.GetMouseButton(0))
             {
-                movement.SetMode(MovementMode.Control);
-                movement.Flap();
+                SignalMachine.Call(new SimpleTapSignal());
             }
         }
     }

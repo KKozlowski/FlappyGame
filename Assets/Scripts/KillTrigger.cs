@@ -4,12 +4,15 @@ using UnityEngine;
 
 namespace Flapper
 {
+    using Signals;
     public class KillTrigger : MonoBehaviour
     {
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.tag == "Bird")
-                Debug.LogError("EEEE");
+            {
+                SignalMachine.Call(new DeathSignal());
+            }
         }
     }
 }

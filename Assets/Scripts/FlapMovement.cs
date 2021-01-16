@@ -4,6 +4,8 @@ using UnityEngine;
 
 namespace Flapper
 {
+    using Signals;
+
     public enum MovementMode
     {
         None = 0,
@@ -22,6 +24,34 @@ namespace Flapper
         private void Start()
         {
             SetMode(MovementMode.Idle);
+
+            SignalMachine.AddListener<GameStartedSignal>(OnGameStarted);
+            SignalMachine.AddListener<SimpleTapSignal>(OnTap);
+            SignalMachine.AddListener<DeathSignal>(OnDeath);
+        }
+
+        private void OnDestroy()
+        {
+            SignalMachine.RemoveListener<GameStartedSignal>(OnGameStarted);
+            SignalMachine.RemoveListener<SimpleTapSignal>(OnTap);
+            SignalMachine.RemoveListener<DeathSignal>(OnDeath);
+        }
+
+        void OnGameStarted(GameStartedSignal arg)
+        {
+            SetMode(MovementMode.Control);
+            Flap();
+        }
+
+        void OnTap(SimpleTapSignal arg)
+        {
+            if (CurrentMode == MovementMode.Control)
+                Flap();
+        }
+
+        void OnDeath(DeathSignal arg)
+        {
+            SetMode(MovementMode.Death);
         }
 
         public void SetMode(MovementMode mode)
@@ -49,6 +79,7 @@ namespace Flapper
 
         public void Flap()
         {
+            Debug.LogError("Flap");
             body.velocity = flapVelocity;
         }
     }
