@@ -79,7 +79,6 @@ namespace Flapper
 
         public void Flap()
         {
-            Debug.LogError("Flap");
             body.velocity = flapVelocity;
         }
     }
