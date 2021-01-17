@@ -24,6 +24,12 @@ namespace Flapper
             SignalMachine.AddListener<SimpleTapSignal>(OnTap);
             SignalMachine.AddListener<DeathSignal>(OnDeath);
             SignalMachine.AddListener<PointScoredSignal>(OnPoint);
+            SignalMachine.AddListener<RestartSignal>(OnRestartCalled);
+        }
+
+        private void OnRestartCalled(RestartSignal obj)
+        {
+            Restart();
         }
 
         private void OnDestroy()
@@ -31,6 +37,12 @@ namespace Flapper
             SignalMachine.RemoveListener<SimpleTapSignal>(OnTap);
             SignalMachine.RemoveListener<DeathSignal>(OnDeath);
             SignalMachine.RemoveListener<PointScoredSignal>(OnPoint);
+            SignalMachine.RemoveListener<RestartSignal>(OnRestartCalled);
+        }
+
+        private void Restart()
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
         }
 
         private void OnPoint(PointScoredSignal obj)
