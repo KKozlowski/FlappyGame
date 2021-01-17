@@ -11,7 +11,7 @@ namespace Flapper
 
         private void Update()
         {
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButtonDown(0))
             {
                 SignalMachine.Call(new SimpleTapSignal());
             }

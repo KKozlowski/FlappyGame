@@ -56,7 +56,12 @@ namespace Flapper
         {
             Vector3 spawnPosition = spawnPoint.position;
             if (usedPipes.Count != 0)
-                spawnPosition = usedPipes[usedPipes.Count - 1].transform.position + Vector3.right * distanceBetweenPipes;
+            {
+                var last = GetLast();
+                spawnPosition = last.transform.position + Vector3.right * distanceBetweenPipes;
+                spawnPosition.y += UnityEngine.Random.Range(0.4f, 1.4f) * (UnityEngine.Random.value > 0.5f ? 1 : -1);
+                spawnPosition.y = Mathf.Clamp(spawnPosition.y, minY, maxY);
+            }
 
             var pipe = pipePool.First();
             pipe.Setup(this, spawnPosition);
@@ -64,6 +69,11 @@ namespace Flapper
 
             pipePool.Remove(pipe);
             usedPipes.Add(pipe);
+        }
+
+        private PipePair GetLast()
+        {
+            return usedPipes[usedPipes.Count - 1];
         }
 
         private void DespawnPipe(PipePair pipe)
