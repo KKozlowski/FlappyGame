@@ -42,7 +42,7 @@ namespace Flapper
 
         private void Restart()
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(1);
         }
 
         private void OnPoint(PointScoredSignal obj)
