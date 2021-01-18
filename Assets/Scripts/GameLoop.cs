@@ -66,6 +66,10 @@ namespace Flapper
             if (State == LoopState.InGame)
             {
                 State = LoopState.PostGame;
+                if(LeaderboardService.TryAdd(new LeaderboardEntry(Score)))
+                {
+                    Debug.Log("On leaderboard");
+                }
             }
         }
     }
