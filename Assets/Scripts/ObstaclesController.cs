@@ -5,7 +5,6 @@ using System.Linq;
 
 namespace Flapper
 {
-    using System;
     using Signals;
     public class ObstaclesController : MonoBehaviour
     {
@@ -104,10 +103,15 @@ namespace Flapper
 
         private void DespawnOldPipes()
         {
+            DestroyPipesBetween(float.NegativeInfinity, despawnPoint.position.x);
+        }
+
+        public void DestroyPipesBetween(float minX, float maxX)
+        {
             var toDespawn = new List<PipePair>();
             foreach (var p in usedPipes)
             {
-                if (p.transform.position.x < despawnPoint.position.x)
+                if (p.ScoringPosition.x > minX && p.StartPosition.x < maxX)
                     toDespawn.Add(p);
             }
             foreach (var p in toDespawn)

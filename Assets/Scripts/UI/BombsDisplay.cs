@@ -5,28 +5,33 @@ using UnityEngine.UI;
 
 namespace Flapper.UI
 {
-    using System;
     using Signals;
-    public class ScoreDisplay : MonoBehaviour
+    public class BombsDisplay : MonoBehaviour
     {
         [SerializeField] private Text display;
         [SerializeField] private GameObject content;
 
-        void Awake()
+        private void Awake()
         {
             content.SetActive(false);
+            SignalMachine.AddListener<NewBombCountSignal>(OnBombCount);
             SignalMachine.AddListener<NewScoreSignal>(OnScore);
         }
 
         private void OnScore(NewScoreSignal obj)
         {
             content.SetActive(true);
-            display.text = obj.Score.ToString();
         }
 
         private void OnDestroy()
         {
+            SignalMachine.RemoveListener<NewBombCountSignal>(OnBombCount);
             SignalMachine.RemoveListener<NewScoreSignal>(OnScore);
+        }
+
+        private void OnBombCount(NewBombCountSignal obj)
+        {
+            display.text = obj.Count.ToString();
         }
     }
 }

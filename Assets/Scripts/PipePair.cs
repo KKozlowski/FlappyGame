@@ -8,9 +8,12 @@ namespace Flapper
     public class PipePair : MonoBehaviour
     {
         [SerializeField] private Transform scorePoint;
+        [SerializeField] private Transform startPoint;
         private ObstaclesController controller;
 
         public bool Scored { get; private set; } = false;
+        public Vector3 StartPosition => startPoint.position;
+        public Vector3 ScoringPosition => scorePoint.position;
 
         public void Setup(ObstaclesController controller, Vector3 position)
         {
