@@ -6,6 +6,6 @@ namespace Flapper.Signals
 {
     public class DoubleTapSignal
     {
-
+        
     }
 }

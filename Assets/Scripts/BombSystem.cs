@@ -13,6 +13,9 @@ namespace Flapper
         public const int PointsToBomb = 10;
         public const int MaxBombs = 3;
 
+        [SerializeField] private Camera boundsCamera;
+        [SerializeField] private ObstaclesController obstacles;
+
         private void Awake()
         {
             SignalMachine.AddListener<PointScoredSignal>(OnPointScored);
@@ -56,6 +59,10 @@ namespace Flapper
 
             --Count;
             SignalMachine.Call(new NewBombCountSignal(Count));
+
+            var min = boundsCamera.ScreenToWorldPoint(new Vector3(0, 0, 0)).x;
+            var max = boundsCamera.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).x;
+            obstacles.DestroyPipesBetween(min, max);
         }
     }
 }
