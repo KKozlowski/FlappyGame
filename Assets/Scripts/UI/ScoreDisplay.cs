@@ -10,15 +10,17 @@ namespace Flapper.UI
     public class ScoreDisplay : MonoBehaviour
     {
         [SerializeField] private Text display;
+        [SerializeField] private GameObject content;
 
         void Awake()
         {
-            display.text = "";
+            content.SetActive(false);
             SignalMachine.AddListener<NewScoreSignal>(OnScore);
         }
 
         private void OnScore(NewScoreSignal obj)
         {
+            content.SetActive(true);
             display.text = obj.Score.ToString();
         }
 
