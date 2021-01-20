@@ -9,7 +9,7 @@ namespace Flapper
         [SerializeField] private SpriteRenderer render;
         public float speed;
 
-        void Update()
+        private void Update()
         {
             var offset = render.material.GetTextureOffset("_MainTex");
             offset += Vector2.right * Time.deltaTime * speed;

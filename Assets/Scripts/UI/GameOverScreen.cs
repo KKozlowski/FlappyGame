@@ -46,7 +46,7 @@ namespace Flapper.UI
             SignalMachine.RemoveListener<NewLeaderboardScoreSignal>(OnHighScore);
         }
 
-        IEnumerator ShowWithDelay(float delay)
+        private IEnumerator ShowWithDelay(float delay)
         {
             yield return new WaitForSeconds(delay);
             scoreDisplay.text = scoreToDisplay.ToString();

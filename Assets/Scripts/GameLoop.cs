@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace Flapper
 {
-    using System;
     using Signals;
 
     public enum LoopState
@@ -51,7 +50,7 @@ namespace Flapper
             SignalMachine.Call(new NewScoreSignal(Score));
         }
 
-        void OnTap(SimpleTapSignal tap)
+        private void OnTap(SimpleTapSignal tap)
         {
             if (State == LoopState.PreGame)
             {
@@ -61,7 +60,7 @@ namespace Flapper
             }
         }
 
-        void OnDeath(DeathSignal arg)
+        private void OnDeath(DeathSignal arg)
         {
             if (State == LoopState.InGame)
             {

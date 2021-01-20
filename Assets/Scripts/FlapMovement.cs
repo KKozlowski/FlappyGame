@@ -37,19 +37,19 @@ namespace Flapper
             SignalMachine.RemoveListener<DeathSignal>(OnDeath);
         }
 
-        void OnGameStarted(GameStartedSignal arg)
+        private void OnGameStarted(GameStartedSignal arg)
         {
             SetMode(MovementMode.Control);
             Flap();
         }
 
-        void OnTap(SimpleTapSignal arg)
+        private void OnTap(SimpleTapSignal arg)
         {
             if (CurrentMode == MovementMode.Control)
                 Flap();
         }
 
-        void OnDeath(DeathSignal arg)
+        private void OnDeath(DeathSignal arg)
         {
             SetMode(MovementMode.Death);
         }

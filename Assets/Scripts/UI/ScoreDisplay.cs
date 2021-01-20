@@ -12,7 +12,7 @@ namespace Flapper.UI
         [SerializeField] private Text display;
         [SerializeField] private GameObject content;
 
-        void Awake()
+        private void Awake()
         {
             content.SetActive(false);
             SignalMachine.AddListener<NewScoreSignal>(OnScore);

@@ -7,7 +7,6 @@ namespace Flapper
     using Signals;
     public class PlayerInput : MonoBehaviour
     {
-        [SerializeField] private FlapMovement movement;
         private float timeSinceLastTap = 0;
 
         private void Update()
