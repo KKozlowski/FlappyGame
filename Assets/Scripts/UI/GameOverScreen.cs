@@ -13,6 +13,8 @@ namespace Flapper.UI
         [SerializeField] private Text scoreDisplay;
         [SerializeField] private GameObject highScoreIndicator;
 
+        [SerializeField] private LeaderboardScreen leaderboard;
+
         private int scoreToDisplay = 0;
 
         private void Start()
@@ -58,7 +60,7 @@ namespace Flapper.UI
 
         public void OpenLeaderboard()
         {
-
+            leaderboard.Show();
         }
     }
 }
