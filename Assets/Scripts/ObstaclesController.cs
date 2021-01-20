@@ -13,6 +13,7 @@ namespace Flapper
         [SerializeField] private Transform scorePoint;
         [SerializeField] private float minY, maxY, distanceBetweenPipes;
         [SerializeField] private Transform spawnPoint, despawnPoint;
+        [SerializeField] private SlideSprite groundAnimation;
 
         private HashSet<PipePair> pipePool = new HashSet<PipePair>();
         private List<PipePair> usedPipes = new List<PipePair>();
@@ -49,6 +50,8 @@ namespace Flapper
         private void OnGameEnd(DeathSignal obj)
         {
             ongoing = false;
+            if (groundAnimation)
+                groundAnimation.speed = 0;
         }
 
         private void SpawnPipe()
