@@ -111,7 +111,7 @@ namespace Flapper
             var toDespawn = new List<PipePair>();
             foreach (var p in usedPipes)
             {
-                if (p.transform.position.x > minX && p.transform.position.x < maxX)
+                if (p.ScoringPosition.x > minX && p.StartPosition.x < maxX)
                     toDespawn.Add(p);
             }
             foreach (var p in toDespawn)
