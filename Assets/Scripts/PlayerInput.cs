@@ -14,7 +14,7 @@ namespace Flapper
             if (Input.GetMouseButtonDown(0))
             {
                 SignalMachine.Call(new SimpleTapSignal());
-                if (timeSinceLastTap < 0.2f)
+                if (timeSinceLastTap < 0.25f)
                 {
                     SignalMachine.Call(new DoubleTapSignal());
                 }

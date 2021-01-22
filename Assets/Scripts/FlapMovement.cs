@@ -18,6 +18,10 @@ namespace Flapper
     {
         [SerializeField] private Rigidbody2D body;
         [SerializeField] private Vector3 flapVelocity = new Vector3(0, 5, 0);
+        [SerializeField] private Transform flapPivot;
+        private float timeToUnflap = 0;
+
+        private const float FlapAnimationTime = 0.3f;
 
         public MovementMode CurrentMode { get; private set; } = MovementMode.None;
 
@@ -28,6 +32,13 @@ namespace Flapper
             SignalMachine.AddListener<GameStartedSignal>(OnGameStarted);
             SignalMachine.AddListener<SimpleTapSignal>(OnTap);
             SignalMachine.AddListener<DeathSignal>(OnDeath);
+        }
+
+        private void Update()
+        {
+            timeToUnflap -= Time.deltaTime;
+            if (timeToUnflap < 0)
+                Unflap();
         }
 
         private void OnDestroy()
@@ -80,6 +91,13 @@ namespace Flapper
         public void Flap()
         {
             body.velocity = flapVelocity;
+            flapPivot.rotation = Quaternion.Euler(0, 0, 180);
+            timeToUnflap = FlapAnimationTime;
+        }
+
+        private void Unflap()
+        {
+            flapPivot.rotation = Quaternion.identity;
         }
     }
 }
