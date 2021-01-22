@@ -18,7 +18,7 @@ namespace Flapper
 
         public bool TryAdd(LeaderboardEntry entry)
         {
-            if (scores.Count == 0 || entry.Score > LastOrDefault().Score)
+            if (scores.Count < MaxSize || entry.Score > LastOrDefault().Score)
             {
                 Add(entry);
                 return true;
@@ -34,14 +34,19 @@ namespace Flapper
                 return;
             }
 
+            bool added = false;
             for (int i = 0; i < scores.Count; ++i)
             {
                 if (entry.Score > scores[i].Score)
                 {
                     scores.Insert(i, entry);
+                    added = true;
                     break;
                 }
             }
+
+            if (!added && scores.Count < MaxSize)
+                scores.Add(entry);
 
             if (scores.Count > MaxSize)
             {
